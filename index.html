@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- LEFT -->
+<div class="left">
+
+<div class="card">
+    <select id="model">
+        <option>SFC</option>
+        <option>BIG CAB (NON-SLEEPER)</option>
+        <option>BIG CAB (SLEEPER)</option>
+    </select>
+
+    <input id="cars" placeholder="Vehicles">
+    <button onclick="calculate()">Calculate</button>
+</div>
+
+<div class="card pieCard">
+    <canvas id="pie"></canvas>
+</div>
+
+<div class="card">
+    <table id="gradeTable"></table>
+</div>
+
+<div class="card">
+    <h2 id="total">Total: 0 KG</h2>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="right">
+
+<div class="card">
+    <img id="truckImage" src="sfc.png">
+    <img id="partImage" src="placeholder.png">
+</div>
+
+<div class="card skuCard">
+    <table id="skuTable"></table>
+</div>
+
+</div>
+
+</div>
+
+<script src="data.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
