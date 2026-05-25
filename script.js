@@ -64,14 +64,43 @@ function calculate() {
     });
 
     for (let g in result) {
-        gradeHTML += `<tr><td>${g}</td><td>${result[g].toFixed(2)}</td></tr>`;
-    }
+    gradeHTML += `
+    <tr onclick="filterGrade('${g}')">
+        <td>${g}</td>
+        <td>${result[g].toFixed(2)}</td>
+    </tr>`;
+}
 
     gradeTable.innerHTML = gradeHTML;
     skuTable.innerHTML = skuHTML;
 
     animateTotal(total);   // ✅ animated
     drawPie(result);
+}
+
+function filterGrade(selectedGrade){
+
+    let model = modelEl.value;
+    let cars = parseInt(carsEl.value) || 1;
+
+    let skuHTML = "<tr><th>Part</th><th>SKU</th><th>Qty</th><th>Weight</th></tr>";
+
+    data.forEach(d => {
+        if (d.model === model && d.grade === selectedGrade) {
+
+            let w = d.weight * cars;
+
+            skuHTML += `
+            <tr onclick="showPart('${d.part}')">
+                <td>${d.part}</td>
+                <td>${d.sku}</td>
+                <td>${d.qty}</td>
+                <td>${w.toFixed(2)}</td>
+            </tr>`;
+        }
+    });
+
+    skuTable.innerHTML = skuHTML;
 }
 
 /* 🔥 TOTAL ANIMATION */
