@@ -9,24 +9,24 @@ const pie = document.getElementById("pie");
 let chart;
 
 const partImages = {
-	"Toe Panel":"toe.png",
-        "Roof":"roof.png",
-        "Door Outer":"door.png",
-        "Assy. Bonnet Side Complete":"bonnet.png",
-        "Assy. Rear Wall":"rearwall.png",
-        "Assy. Corner Panel":"corner.png",
-	"Door Outer Bottom":"door_bottom.png",
-	"Door Inner Bottom":"door_inner.png",
-	"Rear Wall":"rearwall.png",
-	"Corner Panel":"corner.png",
-	"Panel Outer Windsheild":"windshield.png",
-	"Face Panel":"face.png",
-	"Assembly Cover":"cover.png",
-	"Oil Pan":"oilpan.png",
-	"Corner Support 8207":"corner1.png",
-	"Corner Support 0607":"corner2.png",
-	"Push Rod Cover":"pushrod.png",
-	"Window Panel":"window.png",
+"Toe Panel":"toe.png",
+"Roof":"roof.png",
+"Door Outer":"door.png",
+"Assy. Bonnet Side Complete":"bonnet.png",
+"Assy. Rear Wall":"rearwall.png",
+"Assy. Corner Panel":"corner.png",
+"Door Outer Bottom":"door_bottom.png",
+"Door Inner Bottom":"door_inner.png",
+"Rear Wall":"rearwall.png",
+"Corner Panel":"corner.png",
+"Panel Outer Windsheild":"windshield.png",
+"Face Panel":"face.png",
+"Assembly Cover":"cover.png",
+"Oil Pan":"oilpan.png",
+"Corner Support 8207":"corner1.png",
+"Corner Support 0607":"corner2.png",
+"Push Rod Cover":"pushrod.png",
+"Window Panel":"window.png",
 };
 
 const truckImages = {
@@ -70,43 +70,69 @@ function calculate() {
     gradeTable.innerHTML = gradeHTML;
     skuTable.innerHTML = skuHTML;
 
-    document.getElementById("total").innerText =
-        "Total: " + total.toFixed(2) + " KG";
-
+    animateTotal(total);   // ✅ animated
     drawPie(result);
 }
 
+/* 🔥 TOTAL ANIMATION */
+function animateTotal(finalValue){
+    let startTime = null;
+    let duration = 1200;
+
+    function animate(time){
+        if(!startTime) startTime = time;
+
+        let progress = time - startTime;
+        let percent = Math.min(progress/duration,1);
+
+        let value = percent * finalValue;
+
+        document.getElementById("total").innerText =
+            "Total: " + value.toFixed(2) + " KG";
+
+        if(percent < 1){
+            requestAnimationFrame(animate);
+        }
+    }
+
+    requestAnimationFrame(animate);
+}
+
+/* 🔥 PIE ANIMATION */
 function drawPie(result) {
 
     if (chart) chart.destroy();
 
     pie.style.opacity = 0;
-    pie.style.transform = "scale(0.8)";
+    pie.style.transform = "scale(0.7) rotate(-20deg)";
 
     setTimeout(() => {
-        pie.style.opacity = 1;
-        pie.style.transform = "scale(1)";
-    }, 100);
 
-    chart = new Chart(pie, {
-        type: 'pie',
-        data: {
-            labels: Object.keys(result),
-            datasets: [{
-                data: Object.values(result),
-                backgroundColor: ["#3b82f6","#22c55e","#f97316"],
-                hoverOffset: 20
-            }]
-        },
-        options: {
-            responsive:true,
-            maintainAspectRatio:false,
-            animation:{
-                duration:1200,
-                easing:'easeOutExpo'
+        pie.style.transition = "0.6s ease";
+        pie.style.opacity = 1;
+        pie.style.transform = "scale(1) rotate(0deg)";
+
+        chart = new Chart(pie, {
+            type: 'pie',
+            data: {
+                labels: Object.keys(result),
+                datasets: [{
+                    data: Object.values(result),
+                    backgroundColor: ["#3b82f6","#22c55e","#f97316"],
+                    hoverOffset: 25
+                }]
+            },
+            options: {
+                responsive:true,
+                maintainAspectRatio:false,
+                animation:{
+                    duration:1400,
+                    easing:'easeOutExpo'
+                }
             }
-        }
-    });
+        });
+
+    }, 120);
 }
 
 function showPart(part) {
