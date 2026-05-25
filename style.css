@@ -3,11 +3,9 @@ body {
     font-family:Segoe UI;
     color:white;
     overflow-y:auto;
-
     background:url("bg.jpg") center/cover no-repeat fixed;
 }
 
-/* SINGLE SCROLL ONLY */
 .container {
     display:flex;
     min-height:100vh;
@@ -15,7 +13,6 @@ body {
     gap:15px;
 }
 
-/* REMOVE DOUBLE SCROLL */
 .left, .right {
     flex:1;
     display:flex;
@@ -23,7 +20,6 @@ body {
     gap:15px;
 }
 
-/* GLASS */
 .card {
     background:rgba(30,41,59,0.55);
     backdrop-filter:blur(16px);
@@ -37,7 +33,6 @@ body {
     transform:translateY(-5px);
 }
 
-/* INPUT */
 select, input, button {
     padding:10px;
     margin:5px;
@@ -51,7 +46,6 @@ button {
     cursor:pointer;
 }
 
-/* TABLE */
 table {
     width:100%;
     border-collapse:collapse;
@@ -76,8 +70,6 @@ td, th {
     border-radius:18px;
     text-align:center;
     width:280px;
-
-    animation:fadeIn 0.6s ease;
 }
 
 .login-box input {
@@ -88,7 +80,6 @@ tr:hover {
     background:rgba(59,130,246,0.2);
 }
 
-/* IMAGES */
 img {
     width:100%;
     border-radius:12px;
@@ -98,30 +89,28 @@ img {
 #truckImage { height:180px; }
 #partImage { height:140px; margin-top:10px; }
 
-/* PIE */
-.pieCard {
-    height:260px;
-}
+.pieCard { height:260px; }
 
-/* SKU FIX (IMPORTANT) */
-.skuCard {
-    margin-bottom:80px; /* 🔥 FIX CUT ISSUE */
-}
+.skuCard { margin-bottom:80px; }
 
-/* TOTAL */
 #total {
     text-align:center;
     color:#22c55e;
 }
 
-/* TRANSPARENT SCROLLBAR */
-::-webkit-scrollbar {
-    width:8px;
-}
-::-webkit-scrollbar-track {
-    background:transparent;
-}
+/* scrollbar */
+::-webkit-scrollbar { width:8px; }
+::-webkit-scrollbar-track { background:transparent; }
 ::-webkit-scrollbar-thumb {
     background:rgba(255,255,255,0.2);
     border-radius:10px;
+}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+    .container{
+        flex-direction:column;
+    }
+    #truckImage{ height:140px; }
+    #partImage{ height:120px; }
 }
